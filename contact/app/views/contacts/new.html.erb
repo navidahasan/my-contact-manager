@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+  <%= form_for( :contact, url: { action: "create"}) do |f| %>
+  <%= error_messages_for(@contact) %>
+          
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= submit_tag "Create Contact", class: "btn btn-default" %>
+ 
+  <% end %>
+                 
+    
+  </div>
+</div>
+

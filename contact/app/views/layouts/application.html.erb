@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <%= render "layouts/nav" %>
+
+    <div class="container">
+      <div class="col-md-11 col-md-offset-1">
+        <div class="row">
+          <div class="col-md-3">
+            <ul class="list-group">
+              <% active = params[:group_id] == nil ? "active" : "" %>
+              <li class="list-group-item <%= active %>">
+                <span class="badge"><%= ContactModel.count %></span>
+                <%= link_to "All Contacts", { controller: "contacts", action: "index" }  %>
+              </li>
+
+              <% Group.all.each do |group| %>
+              <% active = params[:group_id].to_i == group.id ? "active" : "" %>
+              <li class="list-group-item <%= active %> ">              
+                <span class="badge"><%= group.contacts.count %></span>
+                <%= link_to group.name, { controller: "contacts", action: "index", group_id: group.id } %>
+                
+              </li>
+              <% end %>
+                                                
+            </ul>
+          </div>
+          <div class="col-md-7"> 
+            <% if !flash[:notice].blank? %>
+              <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <%= flash[:notice] %>
+              </div>
+            <% end %>
+              <%= yield %>
+          </div>
+        </div>        
+      </div>
+    </div>
+
+</body>
+</html>

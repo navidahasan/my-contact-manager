@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+  <%= form_for( :contact, url: { action: "update", id: @contact.id  }) do |f| %>
+
+      <%= error_messages_for(@contact) %>      
+      <%= render partial: 'form', locals: { f: f} %>
+
+      <%= submit_tag "Update Contact", class: "btn btn-default" %>
+  <% end %>
+                 
+    
+  </div>
+</div>
+

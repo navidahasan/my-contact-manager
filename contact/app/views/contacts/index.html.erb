@@ -1,0 +1,35 @@
+      <div class="panel panel-default">
+        <div class="panel-body contacts">
+
+        <% @contacts.each do |contact| %>
+
+           <div class="single-contact">
+            <div class="contact-info pull-left">
+              <div class="contact-image">
+              <% if contact.image.blank? %>
+                <img src="http://placehold.it/100x100" alt="Pic of <%= contact.name %>" class="img-circle">
+              <% else %>  
+                <%= image_tag contact.image.url, alt: "Pic of #{contact.name}", 
+                class: "img-circle" %>
+              <% end %>  
+              </div>
+              <div class="contact-details">
+                <span class="contact-name"><%= contact.name %></span>
+                <span class="contact-pro"><%= contact.company %></span>
+                <span class="contact-mail"><%= contact.email %></span>
+              </div>
+            </div>
+            <div class="contact-action pull-right">
+              
+              <%= link_to "Delete", { action: "delete", id: contact.id }, class: "btn btn-sm btn-danger" , data: { confirm: "Are you sure to want to delete this? " } %>
+  
+              <%= link_to "Edit", { action: "edit", id: contact.id }, class: "btn btn-sm btn-success"  %>          
+            </div>
+          </div> 
+        <% end %>  	
+                       
+          
+        </div>
+      </div>
+
+        <%= will_paginate %>
